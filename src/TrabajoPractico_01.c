@@ -31,21 +31,47 @@ int main(void) {
 	float diferencia;
 	int banderaOperaciones;
 	int banderaCase2;
+	int banderaCase5;
 	opcion =0;
 	km =0;
     banderaOperaciones = 0;
     banderaCase2 = 0;
+    banderaCase5 = 0;
     do{
-	puts("\tMENU DE INGRESO DE DATOS DE SU VIAJE");
-	printf("1. Ingresar Kilometros:\n");
-	printf("2. Ingresar Precio de Vuelos: \n");
-	printf("3. Calcular los costos: \n");
-	printf("4. Informar los resultados\n");
-	printf("5. Carga forzada de los datos\n");
-	printf("6. Salir\n\n");
 
 
-	opcion = getIngresoDeOpcion("Ingrese la opcion que desea realizar \n", "Ingrese opcion valida \n");
+	if(opcion==0)
+	{
+		puts("\tMENU DE INGRESO DE DATOS DE SU VIAJE");
+			printf("1. Ingresar Kilometros:\n");
+			printf("2. Ingresar Precio de Vuelos: \n");
+			printf("3. Calcular los costos: \n");
+			printf("4. Informar los resultados\n");
+			printf("5. Carga forzada de los datos\n");
+			printf("6. Salir\n\n");
+
+			opcion = getIngresoDeOpcion("Ingrese la opcion que desea realizar \n", "Ingrese opcion valida \n");
+	}
+	else
+	{
+		if(banderaCase5==1)
+		{
+				opcion=opcion;
+		}
+		else
+		{
+			printf("1. Ingresar Kilometros:\n");
+			printf("2. Ingresar Precio de Vuelos: \n");
+			printf("3. Calcular los costos: \n");
+			printf("4. Informar los resultados\n");
+			printf("5. Carga forzada de los datos\n");
+			printf("6. Salir\n\n");
+
+			opcion = getIngresoDeOpcion("Ingrese la opcion que desea realizar \n", "Ingrese opcion valida \n");
+		}
+
+	}
+
 
 	switch(opcion)
 	{
@@ -69,6 +95,7 @@ int main(void) {
 		}
 
 		break;
+
 	case 3:
 		if(banderaCase2==1)//la banderaDeCase en 1 denota que los precios de los vuelo ya estan cargados, de forma manual, o forzada
 		{
@@ -85,10 +112,12 @@ int main(void) {
 				precioLatamPorKm = Division(precioLatam, km, "NO SE PUEDE REALIZAR LA OPERACION");
 				diferencia = Resta(precioAerolineas, precioLatam);
 				banderaOperaciones = 1;
+				opcion = 4;
 			}
-
-			puts("\nEl costo de los viajes ya se encuentra a su disposicion, elija la opcion 4 para visualizarlos\n\n");//indica que ya estan los precios para cada tipo de pago
-
+			if(banderaCase5==0)
+			{
+				puts("\nEl costo de los viajes ya se encuentra a su disposicion, elija la opcion 4 para visualizarlos\n\n");//indica que ya estan los precios para cada tipo de pago
+			}
 		}
 		else
 		{
@@ -98,7 +127,7 @@ int main(void) {
 	case 4:
 		if(banderaOperaciones==1)// solo si se realizo la carga y posterior cuentas va a imprimir por pantalla los valores
 		{
-			printf("\nKm´s ingresados: %.1f\n", km);
+			printf("\nKms ingresados: %.1f\n", km);
 
 			printf("\nPrecio Aerolineas $%.2f\n", precioAerolineas);
 			printf("a) Precio con descuento es $%.2f\n",precioAerolineasConTD);
@@ -113,17 +142,21 @@ int main(void) {
 			printf("d) Precio por KM es $%.2f\n\n",precioLatamPorKm);
 
 			printf("La diferencia de precio es $%.2f\n\n",diferencia);
-
+			opcion = getIngresoDeOpcion("\n\n\n\nIngrese la opcion 6 para salir\n", "Ingrese opcion valida \n");
 		}
 		else
 			puts("\ndebe calcular los valores en la opcion 3.\n");//si no se realizaron las operaciones para saber los precios, no va a mostar por pantalla y va a pedir que se seleccione la opcion 3 para que realice las operaciones
 
 		break;
-	case 5:
+	  case 5:
 		km = 7090;
 		precioAerolineas = 162965;
 		precioLatam = 159339;
 		banderaCase2=1;//camnio la bandera para que cuando seleccione el 3, le habilite el ingreso a las operaciones, ya que los datos necesarios ya estan cargados
+		opcion= 3;
+		banderaCase5 = 1;
+
+
 		break;
 
 	case 6:
