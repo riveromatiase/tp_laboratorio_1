@@ -15,7 +15,7 @@ int ePasajero_ObtenerIdUnico() {
 /**
  *
  */
-void ImprimirMenu(void)
+void ImprimirMenu(void)//imprimir
 {
 	printf("\n\n\tMENU\n1) Altas\n2) Modificar\n3) Baja\n4) Informar\n5) Harcodeo de datos.\n\n");
 }
